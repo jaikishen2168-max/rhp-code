@@ -1,0 +1,52 @@
+#include<iostream>
+#include<vector>
+#include<set>
+#include<map>
+#include<queue>
+#include<algorithm>
+
+#define INF 2e9
+#define ll long long int
+
+using namespace std;
+
+void solve(){
+	
+	int N; cin>>N;
+	//int H,L; cin>>H>>L;
+	vector<pair<int,int>> arr(N);
+	for(int i=0; i<N; i++){
+		int ht,lt; cin>>ht>>lt;
+		arr[i]=make_pair(ht ,lt);
+	}
+	sort(arr.begin(),arr.end(),greater<>());
+	int previous=0;
+	vector<int> ltarr,htarr;
+	for(auto[ht,lt]:arr){
+		if(lt>previous){
+			previous=lt;
+			ltarr.push_back(lt);
+			htarr.push_back(ht);
+		}
+	}
+	
+	int q; cin>>q;
+	while(q--){
+		int t; cin>>t;
+		auto it=upper_bound(ltarr.begin(),ltarr.end(),t);
+		int idx=it-ltarr.begin();
+		cout<<htarr[idx]<<endl;
+	}
+	
+	
+}
+
+int main(){
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	int tc=1;
+	while(tc--){
+		solve();
+	}
+	return 0;
+}
